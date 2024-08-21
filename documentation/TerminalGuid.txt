@@ -1,0 +1,2 @@
+To create Page := npm run create:page NamePage
+Install Package := npm i
