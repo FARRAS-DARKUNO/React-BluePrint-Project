@@ -6,6 +6,7 @@ import axiosInstance from '../config/AxiosConfig';
 import KEY from '../utils/TypeKey';
 import axios from 'axios';
 import LogOutHandler from '../utils/LogOutHandler';
+import Cookies from 'js-cookie'
 
 function useManipulationData<T>(url: string, method: HttpMethod, typeformData: TypeApplication): [
     SuccsessResponse<T> | null, boolean, ErrorResponseBase | null,
@@ -24,8 +25,7 @@ function useManipulationData<T>(url: string, method: HttpMethod, typeformData: T
             setError(null);
             setLoading(true);
 
-            const token =
-                typeof window !== "undefined" ? localStorage.getItem(KEY.TokenKey) : null;
+            const token = typeof window !== "undefined" ? Cookies.get(KEY.TokenKey) : null;
             const headers = {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": typeformData,
