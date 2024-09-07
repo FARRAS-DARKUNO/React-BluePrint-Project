@@ -14,6 +14,7 @@ interface HeaderBoardProps {
         isOpenDarkMode: boolean;
     };
     languages: LanguageType
+    modalRef : React.RefObject<HTMLDivElement>
 }
 
 const HeaderBoard: React.FC<HeaderBoardProps> = ({
@@ -21,12 +22,13 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
     handleToggleDropdown,
     handleLanguage,
     dropdowns,
-    languages
+    languages,
+    modalRef
 }) => {
     const isDarkMode = useSelector((state: RootState) => state.themeChsnge.isDarkMode);
 
     return (
-        <header className="flex fixed top-0 left-0 w-full bg-secondary dark:bg-secondary-dark p-3 items-center justify-between">
+        <header className="flex fixed top-0 left-0 w-full bg-secondary dark:bg-secondary-dark p-3 items-center justify-between h-[64px]">
             <div className='flex items-center gap-7'>
                 <button
                     className="p-2 text-gray-400 bg-tertiary-light rounded-lg shadow-md hover:bg-primary-light lg:hidden"
@@ -50,8 +52,8 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
                 </button>
             </div>
             <div className="flex flex-row-reverse items-center gap-7 max-lg:hidden" >
-                <div id='Profile'>
-                    <button className="flex items-center gap-2 m-0 p-0 bg-transparent hover:bg-transparent" id="avatarButton" onClick={() => handleToggleDropdown('isOpenAccount')} typeof="button" >
+                <div id='Profile' >
+                    <button  className="flex items-center gap-2 m-0 p-0 bg-transparent hover:bg-transparent" id="avatarButton" onClick={() => handleToggleDropdown('isOpenAccount')} typeof="button" >
                         <img className="w-10 h-10 rounded-full" src="./public/pp.jpg" alt="" />
                         <div id="Profile Info">
                             <h6 className='text-left text-text-dark' >Jese Leos</h6>
@@ -59,7 +61,7 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
                         </div>
                     </button>
                     {dropdowns.isOpenAccount && (
-                        <div id="userDropdown" className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-14">
+                        <div ref={modalRef} id="userDropdown" className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-14">
                             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                 <div>Bonnie Green</div>
                                 <div className="font-medium ">name@flowbite.com</div>
@@ -70,7 +72,7 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
                         </div>
                     )}
                 </div>
-                <div id='Change Language' >
+                <div id='Change Language' ref={modalRef}>
                     <button className="flex items-center gap-2 m-0 p-0 bg-transparent hover:bg-transparent" typeof="button" onClick={() => handleToggleDropdown('isOpenLanguage')}>
                         <img className="w-8 h-8 rounded-full" src={languages == 'Eng' ? "./public/english.png" : "./public/indo.png"} alt="" />
                         <p className='text-left' >{languages == 'Eng' ? "Eng" : "Ind"}</p>
@@ -79,12 +81,12 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
                     {dropdowns.isOpenLanguage && (
                         <div id="userDropdown" className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 top-14">
                             <div className="py-1">
-                                <a onClick={() => handleLanguage('Ind')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >
+                                <a onClick={() => handleLanguage('Ind')} className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >
                                     Indonesia
                                 </a>
                             </div>
                             <div className="py-1">
-                                <a onClick={() => handleLanguage('Eng')} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >
+                                <a onClick={() => handleLanguage('Eng')} className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >
                                     English
                                 </a>
                             </div>

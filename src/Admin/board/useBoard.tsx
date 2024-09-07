@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { LanguageType } from "../../utils/type";
+import { useEffect, useRef, useState } from "react";
+import { LanguageType, PerentSideType } from "../../utils/type";
 import { toggleDarkMode } from "../../store/themeSlice/themeSlice";
 import { useDispatch } from "react-redux";
 
@@ -12,6 +12,15 @@ const useBoard = () => {
         dispatch(toggleDarkMode());
     };
 
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+            console.log('hallo')
+            handleToggleDropdown('closeAll')
+        }
+    }
+
     const [dropdowns, setDropdowns] = useState({
         isOpenAccount: false,
         isOpenLanguage: false,
@@ -20,6 +29,8 @@ const useBoard = () => {
     });
 
     const [languages, setLanguage] = useState<LanguageType>('Eng')
+
+    const [parentActive, setParetntActive] = useState<PerentSideType>('CloseAll')
 
     const handleToggleDropdown = (dropdownName: dropdownName) => {
         setDropdowns(prevState => ({
@@ -34,12 +45,29 @@ const useBoard = () => {
         handleToggleDropdown('closeAll')
     }
 
+
+
+    const ParentActiveChange = (parent: PerentSideType) => {
+        console.log(parent)
+        setParetntActive(parent)
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [parentActive]);
+
     return {
         handleDarkMode,
         handleToggleDropdown,
         handleLanguage,
+        ParentActiveChange,
         dropdowns,
         languages,
+        parentActive,
+        modalRef
     }
 }
 

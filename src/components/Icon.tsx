@@ -1,7 +1,7 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa6'; 
 
-type IconName = keyof typeof FaIcons;
+export type IconName = keyof typeof FaIcons;
 
 interface IconProps {
   name: IconName;

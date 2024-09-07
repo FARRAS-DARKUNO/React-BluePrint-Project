@@ -5,4 +5,5 @@ export type HttpMethod = "post" | "put" | "delete";
 export type LanguageType = 'Eng' | 'Ind'
 
 export type ThemesType = 'dark' | 'light'
- 
+
+export type PerentSideType = 'Menus-ON' | 'Notification-ON' | 'CloseAll'
