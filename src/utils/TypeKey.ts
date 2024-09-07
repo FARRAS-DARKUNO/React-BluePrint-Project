@@ -1,7 +1,9 @@
 const TokenKey = "TOKEN-KEY"
+const DarkModeSetting = "DARKMODE-SETTING"
 
 const KEY = {
-    TokenKey
+    TokenKey,
+    DarkModeSetting
 }
 
 export default KEY
