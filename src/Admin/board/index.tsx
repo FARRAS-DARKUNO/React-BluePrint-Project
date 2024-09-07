@@ -1,8 +1,12 @@
+import HeaderBoard from "./HeaderBoard";
+
 const Board = () => {
     return (
-        <div className="flex w-screen h-screen flex-row bg-slate-400">
-            <div className="flex-1 bg-red-400">hallSSo</div>
-            <div className="flex-1 bg-blue-400">hallo</div>
+        <div className="flex w-100% flex-col bg-slate-400">
+            <HeaderBoard/>
+            <div style={{ height: '9000px' }} >
+                This div has a height of 100px.
+            </div>
         </div>
     );
 }
