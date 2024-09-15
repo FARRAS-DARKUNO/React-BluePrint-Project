@@ -1,5 +1,5 @@
-import HeaderBoard from "./HeaderBoard";
-import SideBar from "./SideBar";
+import HeaderBoard from "./HeaderBoard/HeaderBoard";
+import SideBar from "./SideBar/SideBar";
 import useBoard from "./useBoard";
 
 const Board = () => {
@@ -21,16 +21,18 @@ const Board = () => {
                 handleDarkMode={handleDarkMode}
                 handleToggleDropdown={handleToggleDropdown}
                 handleLanguage={handleLanguage}
+                ParentActiveChange={ParentActiveChange}
                 dropdowns={dropdowns}
                 languages={languages}
                 modalRef={modalRef}
+                parentActive={parentActive}
             />
             <div className="mt-[64px] flex">
-                <SideBar 
+                <SideBar
                     ParentActiveChange={ParentActiveChange}
                     parentActive={parentActive}
                 />
-                <div className={`flex-1 p-4 bg-white h-[1000px] ${parentActive === 'CloseAll' ? "ml-[64px]" : "ml-[320px]"}`}>
+                <div className={`flex-1 p-4 bg-white h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
                     <h1>Konten Utama</h1>
                     <p>Sidebar ini mempengaruhi lebar konten di sebelahnya.</p>
                 </div>

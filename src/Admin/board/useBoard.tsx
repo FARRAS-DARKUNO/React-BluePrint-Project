@@ -8,19 +8,10 @@ export type dropdownName = 'isDarkMode' | 'isOpenAccount' | 'isOpenLanguage' | '
 const useBoard = () => {
     const dispatch = useDispatch();
 
-    const handleDarkMode = () => {
-        dispatch(toggleDarkMode());
-    };
-
     const modalRef = useRef<HTMLDivElement>(null);
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-            console.log('hallo')
-            handleToggleDropdown('closeAll')
-        }
-    }
-
+    const [languages, setLanguage] = useState<LanguageType>('Eng')
+    const [parentActive, setParetntActive] = useState<PerentSideType>('CloseAll')
     const [dropdowns, setDropdowns] = useState({
         isOpenAccount: false,
         isOpenLanguage: false,
@@ -28,10 +19,15 @@ const useBoard = () => {
         isLightMode: true
     });
 
-    const [languages, setLanguage] = useState<LanguageType>('Eng')
-
-    const [parentActive, setParetntActive] = useState<PerentSideType>('CloseAll')
-
+    const handleDarkMode = () => {
+        dispatch(toggleDarkMode());
+    };
+    const handleClickOutside = (event: MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+            console.log('hallo')
+            handleToggleDropdown('closeAll')
+        }
+    }
     const handleToggleDropdown = (dropdownName: dropdownName) => {
         setDropdowns(prevState => ({
             ...prevState,
@@ -39,14 +35,10 @@ const useBoard = () => {
             isOpenLanguage: dropdownName === 'isOpenLanguage' ? !prevState.isOpenLanguage : false,
         }));
     };
-
     const handleLanguage = (language: LanguageType) => {
         setLanguage(language)
         handleToggleDropdown('closeAll')
     }
-
-
-
     const ParentActiveChange = (parent: PerentSideType) => {
         console.log(parent)
         setParetntActive(parent)
@@ -58,6 +50,20 @@ const useBoard = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [parentActive]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 1024) {
+                setParetntActive('CloseAll')
+            }
+        };
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     return {
         handleDarkMode,

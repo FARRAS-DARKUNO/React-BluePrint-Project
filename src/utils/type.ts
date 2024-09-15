@@ -6,4 +6,9 @@ export type LanguageType = 'Eng' | 'Ind'
 
 export type ThemesType = 'dark' | 'light'
 
-export type PerentSideType = 'Menus-ON' | 'Notification-ON' | 'CloseAll'
+export type PerentSideType = 'Menus-ON'
+    | 'Notification-ON'
+    | 'CloseAll'
+    | 'Menus-Mini-ON'
+    | 'Notification-Mini-ON'
+    | 'Settings-Mini-ON'
