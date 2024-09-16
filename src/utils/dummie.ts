@@ -26,6 +26,14 @@ export const MenuData = [
         childMenu: [
             {
                 menuName: "User-Permition",
+                unikName: "user-P",
+            },
+            {
+                menuName: "Menu Setting",
+                unikName: "user-S",
+            },
+            {
+                menuName: "User-Permition",
                 unikName: "user-permition",
             },
             {
