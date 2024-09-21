@@ -1,4 +1,4 @@
-import { RoundSize, Sizing, TypographySize } from "../../utils/type"
+import { ButtonType, RoundSize, Sizing, TypographySize } from "../../utils/type"
 
 export interface Props {
     title?: string
@@ -8,6 +8,7 @@ export interface Props {
     isDisable?: boolean
     roundedSize?: RoundSize
     width?: Sizing
+    buttonType?: ButtonType
 }
 
 const Normal: React.FC<Props> = ({
@@ -17,13 +18,14 @@ const Normal: React.FC<Props> = ({
     isLoading = false,
     isDisable = false,
     width = 'full',
-    roundedSize = 'full'
+    roundedSize = 'full',
+    buttonType = 'button'
 }) => {
     return (
         <div className={`w-[]`}>
             <button
                 onClick={() => isDisable ? null : onClick}
-                type="button"
+                type={buttonType}
                 className={`text-white-light dark:text-text-dark ${!isDisable ? 'bg-button-primary dark:bg-tertiary-dark hover:bg-secondary' : 'bg-gray-500 hover:bg-gray-500'}  
                 font-semibold ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width}`}
                 disabled={isDisable}
@@ -51,13 +53,14 @@ const Gradation: React.FC<Props> = ({
     isLoading = false,
     isDisable = false,
     width = 'full',
-    roundedSize = 'full'
+    roundedSize = 'full',
+    buttonType = 'button'
 }) => {
     return (
         <div>
             <button
                 onClick={() => isDisable ? null : onClick}
-                type="button"
+                type={buttonType}
                 disabled={isDisable}
                 className={`text-white-light dark:text-text-dark bg-gradient-to-r from-button-primary to-button-secondary hover:bg-gradient-to-bl  
                 px-5 py-2  ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width} font-semibold`}
@@ -83,13 +86,14 @@ const Neon: React.FC<Props> = ({
     isLoading = false,
     isDisable = false,
     width = 'full',
-    roundedSize = 'full'
+    roundedSize = 'full',
+    buttonType = 'button'
 }) => {
     return (
         <div>
             <button
                 onClick={() => isDisable ? null : onClick}
-                type="button"
+                type={buttonType}
                 disabled={isDisable}
                 className={`text-white-light dark:text-text-dark bg-gradient-to-r from-button-primary to-button-secondary hover:bg-gradient-to-br  shadow-lg shadow-button-primary 
                 px-5 py-2 font-semibold ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width}`}
@@ -115,13 +119,15 @@ const GradationBorder: React.FC<Props> = ({
     isLoading = false,
     isDisable = false,
     width = 'full',
-    roundedSize = 'full'
+    roundedSize = 'full',
+    buttonType = 'button'
 }) => {
     return (
         <div>
             <button
                 onClick={() => isDisable ? null : onClick}
                 disabled={isDisable}
+                type={buttonType}
                 className={`inline-flex items-center justify-center p-0.5 overflow-hidden ${'text-' + textSize} font-semibold ${'rounded-' + roundedSize} ${'w-' + width} 
                 text-gray-900 group bg-gradient-to-r from-button-primary to-button-secondary group-hover:from-button-primar group-hover:to-button-secondary hover:text-white dark:text-white `}
             >
