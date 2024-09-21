@@ -34,7 +34,7 @@ const Board = () => {
                     parentActive={parentActive}
                 />
                 <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    <MTC.Button.Normal />
+                    <MTC.Button.Normal textSize={'lg'}/>
                     <MTC.Button.Gradation />
                     <MTC.Button.GradationBorder />
                     <MTC.Button.Neon />

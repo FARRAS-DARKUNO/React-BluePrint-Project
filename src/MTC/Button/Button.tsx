@@ -13,7 +13,7 @@ export interface Props {
 const Normal: React.FC<Props> = ({
     title = "title",
     onClick = () => null,
-    textSize = "sm",
+    textSize = 'sm',
     isLoading = false,
     isDisable = false,
     width = 'full',
@@ -25,7 +25,7 @@ const Normal: React.FC<Props> = ({
                 onClick={() => isDisable ? null : onClick}
                 type="button"
                 className={`text-white-light dark:text-text-dark ${!isDisable ? 'bg-button-primary dark:bg-tertiary-dark hover:bg-secondary' : 'bg-gray-500 hover:bg-gray-500'}  
-                font-semibold rounded-${roundedSize} text-${textSize} px-5 py-2 w-${width}`}
+                font-semibold ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width}`}
                 disabled={isDisable}
             >
                 {
@@ -60,7 +60,7 @@ const Gradation: React.FC<Props> = ({
                 type="button"
                 disabled={isDisable}
                 className={`text-white-light dark:text-text-dark bg-gradient-to-r from-button-primary to-button-secondary hover:bg-gradient-to-bl  
-                rounded-${roundedSize} text-${textSize} px-5 py-2 w-${width} font-semibold`}
+                px-5 py-2  ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width} font-semibold`}
             >
                 {
                     isLoading && (
@@ -80,7 +80,7 @@ const Neon: React.FC<Props> = ({
     title = "title",
     onClick = () => null,
     textSize = "sm",
-    isLoading = true,
+    isLoading = false,
     isDisable = false,
     width = 'full',
     roundedSize = 'full'
@@ -92,7 +92,7 @@ const Neon: React.FC<Props> = ({
                 type="button"
                 disabled={isDisable}
                 className={`text-white-light dark:text-text-dark bg-gradient-to-r from-button-primary to-button-secondary hover:bg-gradient-to-br  shadow-lg shadow-button-primary 
-                rounded-${roundedSize} text-${textSize} px-5 py-2 w-${width} font-semibold`}
+                px-5 py-2 font-semibold ${'rounded-' + roundedSize} ${'text-' + textSize} px-5 py-2 ${'w-' + width}`}
             >
                 {
                     isLoading && (
@@ -122,10 +122,10 @@ const GradationBorder: React.FC<Props> = ({
             <button
                 onClick={() => isDisable ? null : onClick}
                 disabled={isDisable}
-                className={`inline-flex items-center justify-center p-0.5 overflow-hidden text-${textSize} font-semibold rounded-${roundedSize} w-${width}
+                className={`inline-flex items-center justify-center p-0.5 overflow-hidden ${'text-' + textSize} font-semibold ${'rounded-' + roundedSize} ${'w-' + width} 
                 text-gray-900 group bg-gradient-to-r from-button-primary to-button-secondary group-hover:from-button-primar group-hover:to-button-secondary hover:text-white dark:text-white `}
             >
-                <span className={`px-5 py-2.5 transition-all ease-in duration-75 bg-background-light dark:bg-background-dark rounded-${roundedSize} group-hover:bg-opacity-0 w-${width}`}>
+                <span className={`px-5 py-2.5 transition-all ease-in duration-75 bg-background-light dark:bg-background-dark ${'rounded-' + roundedSize} group-hover:bg-opacity-0 ${'w-' + width}`}>
                     {
                         isLoading && (
                             <svg aria-hidden="true" role="status" className="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
