@@ -1,3 +1,4 @@
+import MTC from "../../MTC";
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
 import SideBar from "./SideBar/SideBar";
 import useBoard from "./useBoard";
@@ -32,9 +33,11 @@ const Board = () => {
                     ParentActiveChange={ParentActiveChange}
                     parentActive={parentActive}
                 />
-                <div className={`flex-1 p-4 bg-white h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    <h1>Konten Utama</h1>
-                    <p>Sidebar ini mempengaruhi lebar konten di sebelahnya.</p>
+                <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
+                    <MTC.Button.Normal />
+                    <MTC.Button.Gradation />
+                    <MTC.Button.GradationBorder />
+                    <MTC.Button.Neon />
                 </div>
             </div>
         </div>

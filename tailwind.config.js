@@ -12,7 +12,7 @@ export default {
           light: '#29C7CA',
           DEFAULT: '#29C7CA',
           dark: '#2BADAF',
-          shadow:'#355657'
+          shadow: '#355657'
         },
         secondary: {
           light: '#111828',
@@ -48,6 +48,11 @@ export default {
           light: '#CD3B52',
           DEFAULT: '#CD3B52',
           dark: '#A02235',
+        },
+        button: {
+          primary: '#29C7CA',
+          secondary: '#3b82f6',
+          DEFAULT: '#28A2CC',
         },
       },
     },
