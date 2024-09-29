@@ -1,57 +1,94 @@
-import { Sizing } from "../../utils/type"
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Props, { FieldProps } from "./Interface";
 
-export interface Props {
-    type?: React.HTMLInputTypeAttribute
-    htmlFor?: string
-    id?: string
-    placeholder?: string
-    title?: string
-    style?: {
-        width?: Sizing
-        spaceX?: number
-        spaceY?: number
-    }
-}
-
-const Field: React.FC<Props> = ({
-    type = 'text',
+const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
     id = 'default',
     placeholder = 'Input Field',
     title = 'Title Field',
+    helperText = '',
+    name = '',
+    required = false,
+    magic = {
+        type: 'text',
+        errorMessage: 'Input is invalid',
+        inputValue: '',
+        setInputValue: undefined,
+        regex: undefined,
+    },
     style = {
         width: 'full',
         spaceX: 0,
-        spaceY: 0
-    }
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
 }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [isValid, setIsValid] = useState(true);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (magic.setInputValue) {
+            magic.setInputValue(value);
+        }
+
+        if (magic.regex) {
+            setIsValid(magic.regex.test(value));
+        }
+    };
+
     return (
         <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-medium text-text-light dark:text-text-dark"
+                className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
             >
                 {title}
             </label>
-            <input
-                type={type}
-                id={id}
-                name="first_name"
-                className={
-                    `bg-background-light dark:bg-background-dark border border-gray-300 text-gray-900  focus:ring-primary focus:border-primary
-                     dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-                    text-sm rounded-lg block ${'w-' + style.width} p-2.5 
-                   `
-                }
-                placeholder={placeholder}
-                required
-            />
+            <div className="flex items-center w-full">
+                <input
+                    type={showPassword ? 'text' : magic.type}
+                    id={id}
+                    name={name}
+                    className={`flex-grow bg-background-light dark:bg-background-dark border ${isValid ? 'border-secondary-light' : 'border-red-500'} dark:border-secondary-dark text-text-light dark:text-text-dark 
+                        focus:ring-primary focus:border-primary dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
+                        p-2.5 rounded-${style?.roundedSize} text-${style?.textSize}`}
+                    placeholder={placeholder}
+                    required={required}
+                    value={magic.inputValue}
+                    onChange={handleInputChange}
+                />
+                {magic.type === 'password' && (
+                    <button
+                        className={`flex items-center mx-1 cursor-pointer bg-primary-light hover:bg-slate-500 rounded-${style?.roundedSize} px-4`}
+                        onClick={togglePasswordVisibility}
+                    >
+                        {!showPassword ? (
+                            <AiFillEyeInvisible className="text-secondary-light dark:text-secondary-dark" />
+                        ) : (
+                            <AiFillEye className="text-secondary-light dark:text-secondary-dark" />
+                        )}
+                    </button>
+                )}
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+            )}
+            {!isValid && (
+                <p className="mt-1 ml-2 text-sm text-error">{magic.errorMessage}</p>
+            )}
         </div>
-    )
-}
+    );
+};
 
 const Input = {
     Field
-}
+};
 
-export default Input
+export default Input;

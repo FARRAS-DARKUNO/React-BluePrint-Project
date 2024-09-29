@@ -1,3 +1,4 @@
+import { useState } from "react";
 import MTC from "../../MTC";
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
 import SideBar from "./SideBar/SideBar";
@@ -15,6 +16,25 @@ const Board = () => {
         parentActive,
         modalRef
     } = useBoard()
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (field: string, value: string) => {
+        setFormData({
+            ...formData,
+            [field]: value
+        });
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log('Submitted data:', formData);
+    };
 
     return (
         <div className="flex w-100% flex-col bg-background-light dark:bg-background-dark">
@@ -34,11 +54,26 @@ const Board = () => {
                     parentActive={parentActive}
                 />
                 <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    <MTC.Button.Normal />
-                    <MTC.Button.Gradation />
-                    <MTC.Button.GradationBorder />
-                    <MTC.Button.Neon />
-                    <MTC.Input.Field/>
+                    <form onSubmit={handleSubmit}>
+                        <MTC.Input.Field
+                            magic={{
+                                regex: emailRegex,
+                                errorMessage:"hallos",
+                                inputValue: formData.email,
+                                setInputValue: (value) => handleChange('email', value)
+                            }}
+                            required
+                        />
+                        <MTC.Input.Field
+                            helperText="Please enter your password"
+                            magic={{
+                                type: "password",
+                                inputValue: formData.password,
+                                setInputValue: (value) => handleChange('password', value)
+                            }}
+                        />
+                        <MTC.Button.Normal buttonType="submit" />
+                    </form>
                 </div>
             </div>
         </div>
