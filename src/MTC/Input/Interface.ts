@@ -2,7 +2,7 @@ import { RoundSize, Sizing, TypographySize } from "../../utils/type"
 
 
 export default interface Props<T> {
-    id?: string; 
+    id?: string;
     name?: string;
     title?: string;
     htmlFor?: string;
@@ -28,6 +28,13 @@ export interface FieldProps {
     setInputValue?: (value: string) => void;
     inputValue?: string;
     errorMessage?: string;
+}
+
+export interface FileProps {
+    accept?: string
+    selectedFile?: string | File | null;
+    setSelectedFile?: (value: string | File | null) => void;
+    isConvertBase64?: boolean;
 }
 
 

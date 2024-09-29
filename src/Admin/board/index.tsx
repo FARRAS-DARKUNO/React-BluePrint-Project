@@ -21,10 +21,11 @@ const Board = () => {
 
     const [formData, setFormData] = useState({
         email: '',
-        password: ''
+        password: '',
+        selectedFile: null
     });
 
-    const handleChange = (field: string, value: string) => {
+    const handleChange = (field: string, value: any) => {
         setFormData({
             ...formData,
             [field]: value
@@ -58,7 +59,7 @@ const Board = () => {
                         <MTC.Input.Field
                             magic={{
                                 regex: emailRegex,
-                                errorMessage:"hallos",
+                                errorMessage: "hallos",
                                 inputValue: formData.email,
                                 setInputValue: (value) => handleChange('email', value)
                             }}
@@ -70,6 +71,16 @@ const Board = () => {
                                 type: "password",
                                 inputValue: formData.password,
                                 setInputValue: (value) => handleChange('password', value)
+                            }}
+                        />
+                        <MTC.Input.FileUploader
+                            style={{ spaceY: 2 }}
+                            magic={{
+                                selectedFile: formData.selectedFile,
+                                setSelectedFile: (value) => handleChange('selectedFile', value),
+                                isConvertBase64: true,
+                                accept: '.png, .pdf'
+
                             }}
                         />
                         <MTC.Button.Normal buttonType="submit" />

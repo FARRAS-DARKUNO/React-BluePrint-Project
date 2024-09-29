@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { FieldProps } from "./Interface";
+import Props, { FieldProps, FileProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -87,8 +87,128 @@ const Field: React.FC<Props<FieldProps>> = ({
     );
 };
 
+const FileUploader: React.FC<Props<FileProps>> = ({
+    htmlFor = 'default',
+    id = "file-input",
+    placeholder = 'File, Image, Document',
+    title = 'Title Field',
+    helperText = 'Click to upload or drag and drop',
+    required = false,
+    magic = {
+        accept: '',
+        selectedFile: null,
+        setSelectedFile: undefined,
+        isConvertBase64: false
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
+}) => {
+    const [file, setFile] = useState<File | null>(null)
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+
+        if (event.target.files && event.target.files.length > 0) {
+            setFile(event.target.files[0])
+
+            if (magic.setSelectedFile && !magic.isConvertBase64) {
+                magic.setSelectedFile(event.target.files[0]);
+            }
+            if (magic.isConvertBase64 && magic.setSelectedFile) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64String = reader.result as string;
+                    magic.setSelectedFile?.(base64String);
+                };
+                reader.readAsDataURL(event.target.files[0]); // Konversi file ke Base64
+            }
+        }
+    };
+
+    const handleClick = () => {
+        const inputElement = document.getElementById('file-input') as HTMLInputElement;
+        if (inputElement) {
+            inputElement.click();
+        }
+    };
+
+    return (
+        <div className={`flex flex-col items-start w-full mx-${style?.spaceX} my-${style?.spaceY}`}>
+            <label
+                htmlFor={htmlFor}
+                className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
+            >
+                {title}
+            </label>
+            <div
+                className={`flex flex-col items-center justify-center w-full  border-2
+                 border-secondary-light dark:border-secondary-dark border-dashed rounded-lg cursor-pointer bg-background dark:bg-background-dark hover:bg-gray-100 dark:hover:bg-gray-600`
+                }
+                onClick={handleClick}
+            >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                        className="w-10 h-10 mb-4 text-text-light dark:text-text-dark"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 16"
+                    >
+                        <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        />
+                    </svg>
+                    {file ? (
+                        <>
+                            {file.type.startsWith('image/') ? (
+                                <img
+                                    src={URL.createObjectURL(file)}
+                                    alt="Preview"
+                                    className="mb-2 max-h-48"
+
+                                />
+                            ) : (
+                                <p className="mb-2 text-sm text-text-light dark:text-text-dark">
+                                    Selected file: <span className="font-semibold">{file.name}</span>
+                                </p>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <p className="mb-2 text-sm text-text-light dark:text-text-dark font-semibold">
+                                {helperText}
+                            </p>
+                            <p className="text-xs text-text-light dark:text-text-dark">
+                                {placeholder}
+                            </p>
+                        </>
+                    )}
+                </div>
+                <input
+                    id={id}
+                    type="file"
+                    className="hidden"
+                    onChange={handleFileChange}
+                    accept={magic.accept}
+                    required={required}
+                />
+            </div>
+        </div>
+    );
+};
+
 const Input = {
-    Field
+    Field,
+    FileUploader
 };
 
 export default Input;
