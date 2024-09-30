@@ -23,7 +23,7 @@ interface styleProps {
 }
 
 export interface FieldProps {
-    type?: "number" | "email" | "password" | "text";
+    type?: "number" | "email" | "password" | "text" | "date" | "datetime-local";
     regex?: RegExp;
     setInputValue?: (value: string) => void;
     inputValue?: string;
@@ -37,4 +37,9 @@ export interface FileProps {
     isConvertBase64?: boolean;
 }
 
-
+export interface SearchProps {
+    regex?: RegExp;
+    setSearchTerm?: (value: string) => void;
+    searchTerm?: string;
+    onSearch?: () => void
+}

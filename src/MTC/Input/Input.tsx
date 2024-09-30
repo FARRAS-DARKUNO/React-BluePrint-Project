@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { FieldProps, FileProps } from "./Interface";
+import Props, { FieldProps, FileProps, SearchProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -44,7 +44,7 @@ const Field: React.FC<Props<FieldProps>> = ({
     };
 
     return (
-        <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
+        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
                 className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
@@ -105,8 +105,8 @@ const FileUploader: React.FC<Props<FileProps>> = ({
         spaceX: 0,
         spaceY: 0,
         textSize: 'sm',
-        roundedSize: 'full',
-    },
+        roundedSize: 'xl'
+    }
 }) => {
     const [file, setFile] = useState<File | null>(null)
 
@@ -138,7 +138,7 @@ const FileUploader: React.FC<Props<FileProps>> = ({
     };
 
     return (
-        <div className={`flex flex-col items-start w-full mx-${style?.spaceX} my-${style?.spaceY}`}>
+        <div className={`flex flex-col items-start mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
                 className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
@@ -146,8 +146,8 @@ const FileUploader: React.FC<Props<FileProps>> = ({
                 {title}
             </label>
             <div
-                className={`flex flex-col items-center justify-center w-full  border-2
-                 border-secondary-light dark:border-secondary-dark border-dashed rounded-lg cursor-pointer bg-background dark:bg-background-dark hover:bg-gray-100 dark:hover:bg-gray-600`
+                className={`flex flex-col border-dashed rounded-${style.roundedSize || 'xl'}  items-center justify-center w-full cursor-pointer border-2
+                 border-secondary-light dark:border-secondary-dark bg-background dark:bg-background-dark hover:bg-gray-100 dark:hover:bg-gray-600`
                 }
                 onClick={handleClick}
             >
@@ -206,9 +206,87 @@ const FileUploader: React.FC<Props<FileProps>> = ({
     );
 };
 
+const SearchBar: React.FC<Props<SearchProps>> = ({
+    htmlFor = 'search',
+    id = 'default',
+    placeholder = 'Search value...',
+    title = '',
+    helperText = '',
+    required = false,
+    magic = {
+        searchTerm: '',
+        setSearchTerm: undefined,
+        regex: undefined,
+        onSearch: undefined
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
+}) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (magic.setSearchTerm) {
+            magic.setSearchTerm(value);
+        }
+
+
+    };
+
+    return (
+        <div className={`flex items-start flex-col  mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            {title && (
+                <label
+                    htmlFor={htmlFor}
+                    className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
+                >
+                    {title}
+                </label>
+            )}
+            <div className="flex items-center w-full">
+                <div className="relative w-full">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        id={id}
+                        className={`bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-gray-900 
+                        text-sm rounded-${style.roundedSize || 'full'}  block w-full ps-10 p-2.5 `}
+                        placeholder={placeholder}
+                        value={magic.searchTerm}
+                        onChange={handleInputChange}
+                        required={required}
+                    />
+                </div>
+                <button
+                    type="button"
+                    onClick={magic.onSearch}
+                    className={`p-2.5 ms-2 text-sm font-medium text-white bg-primary-light dark:bg-primary-dark rounded-${style.roundedSize || 'full'} `}
+                >
+                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span className="sr-only">Search</span>
+                </button>
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+            )}
+        </div>
+    );
+};
+
+
 const Input = {
     Field,
-    FileUploader
+    FileUploader,
+    SearchBar
 };
 
 export default Input;

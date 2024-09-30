@@ -22,8 +22,13 @@ const Board = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        selectedFile: null
+        selectedFile: null,
+        search: ''
     });
+
+    const handleSearch = () => {
+        console.log(formData.search)
+    }
 
     const handleChange = (field: string, value: any) => {
         setFormData({
@@ -63,7 +68,6 @@ const Board = () => {
                                 inputValue: formData.email,
                                 setInputValue: (value) => handleChange('email', value)
                             }}
-                            required
                         />
                         <MTC.Input.Field
                             helperText="Please enter your password"
@@ -74,7 +78,7 @@ const Board = () => {
                             }}
                         />
                         <MTC.Input.FileUploader
-                            style={{ spaceY: 2 }}
+                            style={{ spaceY: 2, roundedSize: 'xl' }}
                             magic={{
                                 selectedFile: formData.selectedFile,
                                 setSelectedFile: (value) => handleChange('selectedFile', value),
@@ -82,7 +86,9 @@ const Board = () => {
                                 accept: '.png, .pdf'
 
                             }}
+
                         />
+                        <MTC.Input.SearchBar magic={{ onSearch: handleSearch, searchTerm: formData.search, setSearchTerm: (value) => handleChange('search', value) }} />
                         <MTC.Button.Normal buttonType="submit" />
                     </form>
                 </div>
