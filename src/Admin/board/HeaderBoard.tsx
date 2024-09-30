@@ -31,6 +31,7 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
 
 
     handleLanguage = (lng: LanguageType) => {
+        languages = lng;
         i18n.changeLanguage(lng); // Mengubah bahasa
     };
     return (
