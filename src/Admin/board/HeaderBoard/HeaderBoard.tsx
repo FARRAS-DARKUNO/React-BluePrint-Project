@@ -36,7 +36,7 @@ const HeaderBoard: React.FC<HeaderBoardProps> = ({
 
     return (
         <>
-            <header className="flex fixed top-0 left-0 w-full bg-secondary dark:bg-secondary-dark p-3 items-center justify-between h-[64px]">
+            <header className="flex fixed top-0 left-0 w-full bg-secondary dark:bg-secondary p-3 items-center justify-between h-[64px]">
                 <div className='flex items-center gap-7'>
                     <button
                         onClick={() => ParentActiveChange(parentActive == 'Menus-Mini-ON' ? 'CloseAll' : 'Menus-Mini-ON')}

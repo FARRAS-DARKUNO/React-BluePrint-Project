@@ -47,7 +47,7 @@ const Field: React.FC<Props<FieldProps>> = ({
         <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
             >
                 {title}
             </label>
@@ -70,9 +70,9 @@ const Field: React.FC<Props<FieldProps>> = ({
                         onClick={togglePasswordVisibility}
                     >
                         {!showPassword ? (
-                            <AiFillEyeInvisible className="text-secondary-light dark:text-secondary-dark" />
+                            <AiFillEyeInvisible className="text-text-light dark:text-text-dark" />
                         ) : (
-                            <AiFillEye className="text-secondary-light dark:text-secondary-dark" />
+                            <AiFillEye className="text-text-light dark:text-text-dark" />
                         )}
                     </button>
                 )}
@@ -141,7 +141,7 @@ const FileUploader: React.FC<Props<FileProps>> = ({
         <div className={`flex flex-col items-start mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
             >
                 {title}
             </label>
@@ -241,7 +241,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
             {title && (
                 <label
                     htmlFor={htmlFor}
-                    className="block mb-2 text-sm font-semibold text-text-light dark:text-text-dark ml-2"
+                    className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
                 >
                     {title}
                 </label>
@@ -249,14 +249,14 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
             <div className="flex items-center w-full">
                 <div className="relative w-full">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-secondary-light dark:text-secondary-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
                     <input
                         type="text"
                         id={id}
-                        className={`bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-gray-900 
+                        className={`bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-text-light dark:text-text-dark
                         text-sm rounded-${style.roundedSize || 'full'}  block w-full ps-10 p-2.5 `}
                         placeholder={placeholder}
                         value={magic.searchTerm}

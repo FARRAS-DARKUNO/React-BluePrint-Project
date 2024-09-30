@@ -17,7 +17,7 @@ export default {
         secondary: {
           light: '#111828',
           DEFAULT: '#111828',
-          dark: '#111828',
+          dark: '#51a6f5',
         },
         tertiary: {
           light: '#28A2CC',
