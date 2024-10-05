@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { FieldProps, FileProps, SearchProps } from "./Interface";
+import Props, { FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -237,7 +237,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
     };
 
     return (
-        <div className={`flex items-start flex-col  mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             {title && (
                 <label
                     htmlFor={htmlFor}
@@ -282,11 +282,155 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
     );
 };
 
+const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
+    id = 'search-category',
+    placeholder = 'Search value...',
+    title = '',
+    htmlFor = 'search-dropdown',
+    helperText = '',
+    required = false,
+    magic = {
+        setSearchTerm: undefined,
+        setSelectedCategory: undefined,
+        searchTerm: '',
+        selectedCategory: 'All',
+        categories: [],
+        onSearch: undefined
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'lg',
+    },
+}) => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const handleDropdownToggle = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleCategorySelect = (category: string) => {
+        if (magic.setSelectedCategory) {
+            magic.setSelectedCategory(category);
+        }
+        setIsDropdownOpen(false);
+    };
+
+    return (
+        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            {title && (
+                <label
+                    htmlFor={htmlFor}
+                    className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                >
+                    {title}
+                </label>
+            )}
+            <div className="flex w-full">
+                <label htmlFor="search-dropdown" className="sr-only">Search</label>
+
+                <div className="relative">
+                    <button
+                        id={id}
+                        type="button"
+                        onClick={handleDropdownToggle}
+                        className={`flex-shrink-0 z-10 inline-flex items-center py-3.5 px-2 text-sm font-medium border truncate max-w-xs rounded-s-${style.roundedSize} rounded-tr-none rounded-br-none
+                         text-text-light dark:text-text-dark bg-gray-100  hover:bg-gray-200  dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 `}
+                    >
+                        <span className="truncate text-xs">{magic.selectedCategory}</span>
+                        <svg
+                            className="w-2.5 h-2.5 ml-2.5"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m1 1 4 4 4-4"
+                            />
+                        </svg>
+                    </button>
+                    {isDropdownOpen && (
+                        <div className={`absolute z-10 bg-background-light dark:bg-background-dark divide-y divide-gray-100 rounded-${style.roundedSize || 'lg'} shadow w-max`}>
+                            <ul className="py-2 text-sm text-text-light dark:text-text-dark">
+                                {magic.categories?.map((category) => (
+                                    <li key={category}>
+                                        <button
+                                            type="button"
+                                            className="inline-flex w-max px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-text-light dark:text-text-dark truncate"
+                                            onClick={() => handleCategorySelect(category)}
+                                        >
+                                            <span className="truncate max-w-xs">{category}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
+                <div className="flex w-full">
+                    <input
+                        type="search"
+                        id="search-dropdown"
+                        value={magic.searchTerm}
+                        onChange={(a) => {
+                            if (magic.setSearchTerm) {
+                                magic.setSearchTerm(a.target.value);
+                            }
+                        }}
+                        className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-none border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                        placeholder={placeholder}
+                        required={required}
+                    />
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (magic.onSearch) {
+                                magic.onSearch();
+                            }
+                        }}
+                        className={`p-2.5 text-sm font-medium text-white bg-primary-light dark:bg-primary-dark rounded-r-${style.roundedSize} rounded-l-none`}
+                    >
+                        <svg
+                            className="w-4 h-4"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                            />
+                        </svg>
+                        <span className="sr-only">Search</span>
+                    </button>
+                </div>
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+            )}
+        </div>
+    );
+};
+
 
 const Input = {
     Field,
     FileUploader,
-    SearchBar
+    SearchBar,
+    SearchDropdown
 };
 
 export default Input;

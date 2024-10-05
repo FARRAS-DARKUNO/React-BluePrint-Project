@@ -43,3 +43,13 @@ export interface SearchProps {
     searchTerm?: string;
     onSearch?: () => void
 }
+
+export interface SearchDropDownProps {
+    setSearchTerm?: (value: string) => void;
+    setSelectedCategory?: (value: string) => void;
+    regex?: RegExp;
+    searchTerm?: string;
+    selectedCategory?: string;
+    categories?: string[];
+    onSearch?: () => void
+}

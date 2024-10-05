@@ -23,8 +23,12 @@ const Board = () => {
         email: '',
         password: '',
         selectedFile: null,
-        search: ''
+        search: '',
+        categoryValue: 'all',
+        searchDropdown: ''
     });
+
+    const category = ['Hallo kamuu', "hallo Aku", "Hallo KitA Semua"]
 
     const handleSearch = () => {
         console.log(formData.search)
@@ -41,6 +45,8 @@ const Board = () => {
         e.preventDefault();
         console.log('Submitted data:', formData);
     };
+
+
 
     return (
         <div className="flex w-100% flex-col bg-background-light dark:bg-background-dark">
@@ -89,6 +95,17 @@ const Board = () => {
 
                         />
                         <MTC.Input.SearchBar magic={{ onSearch: handleSearch, searchTerm: formData.search, setSearchTerm: (value) => handleChange('search', value) }} />
+                        <MTC.Input.SearchDropdown magic={{
+                            categories: category,
+                            searchTerm: formData.searchDropdown,
+                            setSelectedCategory: (value) => handleChange('categoryValue', value),
+                            onSearch: () => {
+                                console.log(formData.categoryValue)
+                                console.log(formData.searchDropdown)
+                            },
+                            selectedCategory: formData.categoryValue,
+                            setSearchTerm: (value) => handleChange('searchDropdown', value),
+                        }} />
                         <MTC.Button.Normal buttonType="submit" />
                     </form>
                 </div>
