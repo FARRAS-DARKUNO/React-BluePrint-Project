@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
+import Props, { FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -425,12 +425,80 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
     );
 };
 
+const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
+    htmlFor = 'default',
+    id = 'default',
+    placeholder = 'Select an option',
+    title = 'Title Field',
+    helperText = '',
+    name = '',
+    required = false,
+    magic = {
+        type: 'select',
+        errorMessage: 'Selection is invalid',
+        inputValue: '',
+        setInputValue: undefined,
+        options: [],
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
+}) => {
+
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        if (magic.setInputValue) {
+            magic.setInputValue(value);
+        }
+    };
+
+    return (
+        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            <label
+                htmlFor={htmlFor}
+                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+            >
+                {title}
+            </label>
+            <div className="flex items-center w-full">
+                <select
+                    id={id}
+                    name={name}
+                    className={`flex-grow bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-text-light dark:text-text-dark 
+                         dark:placeholder-gray-400 
+                        p-2.5 rounded-${style?.roundedSize} text-${style?.textSize}`}
+                    value={magic.inputValue}
+                    onChange={handleSelectChange}
+                    required={required}
+                >
+                    <option value="" disabled>
+                        {placeholder}
+                    </option>
+                    {magic.options && magic.options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+            )}
+        </div>
+    );
+};
+
 
 const Input = {
     Field,
     FileUploader,
     SearchBar,
-    SearchDropdown
+    SearchDropdown,
+    FieldDropDown
 };
 
 export default Input;

@@ -53,3 +53,16 @@ export interface SearchDropDownProps {
     categories?: string[];
     onSearch?: () => void
 }
+
+
+export interface FieldDropDownProps {
+    type?: "number" | "email" | "password" | "text" | "date" | "datetime-local";
+    regex?: RegExp;
+    setInputValue?: (value: string) => void;
+    inputValue?: string;
+    errorMessage?: string;
+    options?: {
+        label?: string;
+        value?: string | number;
+    }[]
+}

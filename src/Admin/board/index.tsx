@@ -106,6 +106,13 @@ const Board = () => {
                             selectedCategory: formData.categoryValue,
                             setSearchTerm: (value) => handleChange('searchDropdown', value),
                         }} />
+                        <MTC.Input.FieldDropDown magic={{
+                            options: [
+                                { label: "hallo", value: "Mantap" },
+                                { label: "hallo2", value: "Mantap2" },
+                                { label: "hallo3", value: "Mantap4" }
+                            ]
+                        }} />
                         <MTC.Button.Normal buttonType="submit" />
                     </form>
                 </div>
