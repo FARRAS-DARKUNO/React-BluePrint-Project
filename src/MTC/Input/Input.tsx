@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
+import Props, { CheckingProps, CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -583,13 +583,66 @@ const Counter: React.FC<Props<CounterProps>> = ({
     );
 };
 
+const Checkbox: React.FC<Props<CheckingProps>> = ({
+    id = "helper-checkbox",
+    title = 'Title Field',
+    helperText = 'fdfdf',
+    disable = false,
+    magic = {
+        isChecked: true,
+        setIsChecked: undefined
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
+}) => {
+
+    const handleCheckboxChange = () => {
+        if (magic.setIsChecked)
+            magic.setIsChecked(!magic.isChecked);
+    };
+
+    return (
+        <div className={`flex mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            <div className="flex items-center h-5">
+                <input
+                    id={id}
+                    aria-describedby="helper-checkbox-text"
+                    type="checkbox"
+                    checked={magic.isChecked}
+                    onChange={handleCheckboxChange}
+                    disabled={disable}
+                    className="w-4 h-4 text-primary-light dark:text-primary-dark bg-background-light dark:bg-background-dark border-gray-300 rounded dark:border-gray-600"
+                />
+            </div>
+            <div className="ms-2 text-sm">
+                {title && (
+                    <label htmlFor="helper-checkbox" className="font-medium text-field-text dark:text-field-text_dark">
+                        {title}
+                    </label>
+                )}
+                {helperText && (
+                    <p id="helper-checkbox-text" className="text-xs font-normal text-field-text dark:text-field-text_dark">
+                        {helperText}
+                    </p>
+                )}
+            </div>
+        </div>
+    );
+};
+
 const Input = {
     Field,
     FileUploader,
     SearchBar,
     SearchDropdown,
     FieldDropDown,
-    Counter
+    Counter,
+    Checkbox
 };
 
 export default Input;

@@ -9,6 +9,7 @@ export default interface Props<T> {
     placeholder?: string;
     helperText?: string;
     required?: boolean;
+    disable?:boolean;
     style?: styleProps;
     magic?: T
 }
@@ -72,4 +73,9 @@ export interface CounterProps {
     inputValue?: number;
     minimum?: number;
     maximum?: number
+}
+
+export interface CheckingProps {
+    setIsChecked?: (value: boolean) => void;
+    isChecked?: boolean;
 }

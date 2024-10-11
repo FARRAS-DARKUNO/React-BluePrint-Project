@@ -120,8 +120,8 @@ const Board = () => {
                             maximum: 10,
                             minimum:1
                         }} />
-                        <MTC.Button.Normal buttonType="submit" />
-                        <MTC.Button.Neon buttonType="submit" />
+                        <MTC.Input.Checkbox/>
+                    
                         <MTC.Button.GradationBorder buttonType="submit" />
                     </form>
                 </div>
