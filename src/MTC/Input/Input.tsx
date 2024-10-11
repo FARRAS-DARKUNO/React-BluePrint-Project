@@ -66,19 +66,19 @@ const Field: React.FC<Props<FieldProps>> = ({
                 />
                 {magic.type === 'password' && (
                     <button
-                        className={`flex items-center mx-1 cursor-pointer bg-primary-light hover:bg-slate-500 rounded-${style?.roundedSize} px-4`}
+                        className={`flex items-center mx-1 cursor-pointer bg-button-primary dark:bg-button-primary_dark hover:bg-slate-500 rounded-${style?.roundedSize} px-4`}
                         onClick={togglePasswordVisibility}
                     >
                         {!showPassword ? (
-                            <AiFillEyeInvisible className="text-text-light dark:text-text-dark" />
+                            <AiFillEyeInvisible className="text-button-on_button dark:text-button-on_button_dark" />
                         ) : (
-                            <AiFillEye className="text-text-light dark:text-text-dark" />
+                            <AiFillEye className="text-button-on_button dark:text-button-on_button_dark" />
                         )}
                     </button>
                 )}
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
             )}
             {!isValid && (
                 <p className="mt-1 ml-2 text-sm text-error">{magic.errorMessage}</p>
@@ -267,7 +267,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
                 <button
                     type="button"
                     onClick={magic.onSearch}
-                    className={`p-2.5 ms-2 text-sm font-medium text-white bg-primary-light dark:bg-primary-dark rounded-${style.roundedSize || 'full'} `}
+                    className={`p-2.5 ms-2 text-sm font-medium text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark rounded-${style.roundedSize || 'full'} `}
                 >
                     <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -276,7 +276,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
                 </button>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
             )}
         </div>
     );
@@ -397,7 +397,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
                                 magic.onSearch();
                             }
                         }}
-                        className={`p-2.5 text-sm font-medium text-white bg-primary-light dark:bg-primary-dark rounded-r-${style.roundedSize} rounded-l-none`}
+                        className={`p-2.5 text-sm font-medium text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark rounded-r-${style.roundedSize} rounded-l-none`}
                     >
                         <svg
                             className="w-4 h-4"
@@ -419,7 +419,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
                 </div>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
             )}
         </div>
     );
@@ -486,7 +486,7 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
                 </select>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
             )}
         </div>
     );
@@ -552,9 +552,9 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     type="button"
                     id="decrement-button"
                     onClick={decrementQuantity}
-                    className={`bg-background-light dark:bg-background-light dark:hover:bg-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-${style.roundedSize} p-3 h-11`}
+                    className={`text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark border border-gray-300 rounded-l-${style.roundedSize} p-3 h-11`}
                 >
-                    <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                    <svg className="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                     </svg>
                 </button>
@@ -563,7 +563,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     id={id}
                     value={magic.inputValue}
                     onChange={handleChange}
-                    className={`bg-background-light dark:bg-background-light h-11 text-center text-text-light dark:text-text-dark text-sm block w-full py-2.5`}
+                    className={`bg-background-light dark:bg-background-dark h-11 text-center text-text-light dark:text-text-dark text-sm block w-full py-2.5`}
                     required={required}
                     disabled
                 />
@@ -571,15 +571,15 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     type="button"
                     id="increment-button"
                     onClick={incrementQuantity}
-                    className={`bg-background-light dark:bg-background-light dark:hover:bg-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-${style.roundedSize} p-3 h-11`}
+                    className={`text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark border border-gray-300 rounded-r-${style.roundedSize} p-3 h-11`}
                 >
-                    <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
                     </svg>
                 </button>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
             )}
         </div>
     );

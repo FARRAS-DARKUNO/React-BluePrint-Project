@@ -52,7 +52,12 @@ export default {
         button: {
           primary: '#29C7CA',
           secondary: '#3b82f6',
+          primary_dark: '#29C7CA',
+          secondary_dark: '#3b82f6',
           DEFAULT: '#28A2CC',
+          on_button: '#FFFFFF',
+          on_button_dark: '#FFFFFF',
+          disable: '#EBEBE4'
         },
       },
     },

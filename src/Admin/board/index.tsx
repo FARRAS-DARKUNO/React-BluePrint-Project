@@ -121,6 +121,8 @@ const Board = () => {
                             minimum:1
                         }} />
                         <MTC.Button.Normal buttonType="submit" />
+                        <MTC.Button.Neon buttonType="submit" />
+                        <MTC.Button.GradationBorder buttonType="submit" />
                     </form>
                 </div>
             </div>
