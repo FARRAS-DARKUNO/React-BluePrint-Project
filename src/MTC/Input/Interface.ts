@@ -66,3 +66,10 @@ export interface FieldDropDownProps {
         value?: string | number;
     }[]
 }
+
+export interface CounterProps {
+    setInputValue?: (value: number) => void;
+    inputValue?: number;
+    minimum?: number;
+    maximum?: number
+}

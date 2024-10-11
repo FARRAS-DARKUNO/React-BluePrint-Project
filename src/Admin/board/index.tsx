@@ -25,7 +25,8 @@ const Board = () => {
         selectedFile: null,
         search: '',
         categoryValue: 'all',
-        searchDropdown: ''
+        searchDropdown: '',
+        counter: 0,
     });
 
     const category = ['Hallo kamuu', "hallo Aku", "Hallo KitA Semua"]
@@ -112,6 +113,12 @@ const Board = () => {
                                 { label: "hallo2", value: "Mantap2" },
                                 { label: "hallo3", value: "Mantap4" }
                             ]
+                        }} />
+                        <MTC.Input.Counter magic={{
+                            inputValue: formData.counter,
+                            setInputValue: (value) => handleChange('counter', value),
+                            maximum: 10,
+                            minimum:1
                         }} />
                         <MTC.Button.Normal buttonType="submit" />
                     </form>

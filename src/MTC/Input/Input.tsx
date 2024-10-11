@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
+import Props, { CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -492,13 +492,106 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
     );
 };
 
+const Counter: React.FC<Props<CounterProps>> = ({
+    htmlFor = 'default',
+    id = 'default',
+    title = 'Title Field',
+    helperText = '',
+    required = false,
+    magic = {
+        inputValue: 0,
+        maximum: 10,
+        minimum: 0,
+        setInputValue: undefined
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'full',
+    },
+}) => {
+
+    const incrementQuantity = () => {
+        if (magic.inputValue! < magic.maximum!) {
+            if (magic.setInputValue) {
+                console.log('a')
+                magic.setInputValue(magic.inputValue! + 1);
+            }
+        }
+    };
+
+    const decrementQuantity = () => {
+        if (magic.inputValue! > magic.minimum!) {
+            if (magic.setInputValue) {
+                magic.setInputValue(magic.inputValue! - 1);
+            }
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value);
+        if (value >= 1 && value <= 50) {
+            if (magic.setInputValue && magic.inputValue) {
+                magic.setInputValue(value);
+            }
+        }
+    };
+
+    return (
+        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            <label
+                htmlFor={htmlFor}
+                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+            >
+                {title}
+            </label>
+            <div className="relative flex items-center max-w-[8rem]">
+                <button
+                    type="button"
+                    id="decrement-button"
+                    onClick={decrementQuantity}
+                    className={`bg-background-light dark:bg-background-light dark:hover:bg-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-${style.roundedSize} p-3 h-11`}
+                >
+                    <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
+                    </svg>
+                </button>
+                <input
+                    type="text"
+                    id={id}
+                    value={magic.inputValue}
+                    onChange={handleChange}
+                    className={`bg-background-light dark:bg-background-light h-11 text-center text-text-light dark:text-text-dark text-sm block w-full py-2.5`}
+                    required={required}
+                    disabled
+                />
+                <button
+                    type="button"
+                    id="increment-button"
+                    onClick={incrementQuantity}
+                    className={`bg-background-light dark:bg-background-light dark:hover:bg-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-${style.roundedSize} p-3 h-11`}
+                >
+                    <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16" />
+                    </svg>
+                </button>
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-secondary-light dark:text-secondary-dark">{helperText}</p>
+            )}
+        </div>
+    );
+};
 
 const Input = {
     Field,
     FileUploader,
     SearchBar,
     SearchDropdown,
-    FieldDropDown
+    FieldDropDown,
+    Counter
 };
 
 export default Input;
