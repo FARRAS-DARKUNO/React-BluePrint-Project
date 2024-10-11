@@ -59,6 +59,17 @@ export default {
           on_button_dark: '#FFFFFF',
           disable: '#EBEBE4'
         },
+        field: {
+          DEFAULT: '#111828',
+          text: '#111828',
+          text_dark: '#FFFFFF',
+          border: '#111828',
+          border_dark: '#51a6f5',
+          ring: '#2BADAF',
+          ring_dark: '#2BADAF',
+          placeholder :'#808080',
+          placeholder_dark :'#808080',
+        }
       },
     },
   },

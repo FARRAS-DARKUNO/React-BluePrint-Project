@@ -47,7 +47,7 @@ const Field: React.FC<Props<FieldProps>> = ({
         <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
             >
                 {title}
             </label>
@@ -56,8 +56,8 @@ const Field: React.FC<Props<FieldProps>> = ({
                     type={showPassword ? 'text' : magic.type}
                     id={id}
                     name={name}
-                    className={`flex-grow bg-background-light dark:bg-background-dark border ${isValid ? 'border-secondary-light' : 'border-red-500'} dark:border-secondary-dark text-text-light dark:text-text-dark 
-                        focus:ring-primary focus:border-primary dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
+                    className={`flex-grow bg-background-light dark:bg-background-dark border ${isValid ? 'border-field-border' : 'border-red-500'} dark:border-field-border_dark text-field-text dark:text-field-text_dark 
+                        focus:ring-field-ring placeholder-field-placeholder dark:placeholder-field-placeholder_dark dark:focus:ring-field-ring_dark 
                         p-2.5 rounded-${style?.roundedSize} text-${style?.textSize}`}
                     placeholder={placeholder}
                     required={required}
@@ -78,7 +78,7 @@ const Field: React.FC<Props<FieldProps>> = ({
                 )}
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-field-text dark:text-field-text_dark">{helperText}</p>
             )}
             {!isValid && (
                 <p className="mt-1 ml-2 text-sm text-error">{magic.errorMessage}</p>
@@ -141,19 +141,19 @@ const FileUploader: React.FC<Props<FileProps>> = ({
         <div className={`flex flex-col items-start mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
             >
                 {title}
             </label>
             <div
                 className={`flex flex-col border-dashed rounded-${style.roundedSize || 'xl'}  items-center justify-center w-full cursor-pointer border-2
-                 border-secondary-light dark:border-secondary-dark bg-background dark:bg-background-dark hover:bg-gray-100 dark:hover:bg-gray-600`
+                border-field-border dark:border-field-border_dark bg-background dark:bg-background-dark hover:bg-gray-100 dark:hover:bg-gray-600`
                 }
                 onClick={handleClick}
             >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
-                        className="w-10 h-10 mb-4 text-text-light dark:text-text-dark"
+                        className="w-10 h-10 mb-4 text-field-border dark:text-field-border_dark"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -177,17 +177,17 @@ const FileUploader: React.FC<Props<FileProps>> = ({
 
                                 />
                             ) : (
-                                <p className="mb-2 text-sm text-text-light dark:text-text-dark">
+                                <p className="mb-2 text-sm text-field-text dark:text-field-text_dark">
                                     Selected file: <span className="font-semibold">{file.name}</span>
                                 </p>
                             )}
                         </>
                     ) : (
                         <>
-                            <p className="mb-2 text-sm text-text-light dark:text-text-dark font-semibold">
+                            <p className="mb-2 text-sm text-field-text dark:text-field-text_dark font-semibold">
                                 {helperText}
                             </p>
-                            <p className="text-xs text-text-light dark:text-text-dark">
+                            <p className="text-xs text-field-text dark:text-field-text_dark">
                                 {placeholder}
                             </p>
                         </>
@@ -232,8 +232,6 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
         if (magic.setSearchTerm) {
             magic.setSearchTerm(value);
         }
-
-
     };
 
     return (
@@ -241,7 +239,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
             {title && (
                 <label
                     htmlFor={htmlFor}
-                    className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                    className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
                 >
                     {title}
                 </label>
@@ -249,14 +247,14 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
             <div className="flex items-center w-full">
                 <div className="relative w-full">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg className="w-4 h-4 text-secondary-light dark:text-secondary-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-field-border dark:text-field-border_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
                     <input
                         type="text"
                         id={id}
-                        className={`bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-text-light dark:text-text-dark
+                        className={`bg-background-light dark:bg-background-dark border border-field-border dark:border-field-border_dark text-field-text dark:text-field-text_dark placeholder-field-placeholder dark:placeholder-field-placeholder_dark
                         text-sm rounded-${style.roundedSize || 'full'}  block w-full ps-10 p-2.5 `}
                         placeholder={placeholder}
                         value={magic.searchTerm}
@@ -276,7 +274,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
                 </button>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-field-text dark:text-field-text_dark">{helperText}</p>
             )}
         </div>
     );
@@ -323,7 +321,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
             {title && (
                 <label
                     htmlFor={htmlFor}
-                    className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                    className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
                 >
                     {title}
                 </label>
@@ -460,7 +458,7 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
         <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
             >
                 {title}
             </label>
@@ -468,9 +466,9 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
                 <select
                     id={id}
                     name={name}
-                    className={`flex-grow bg-background-light dark:bg-background-dark border border-secondary-light dark:border-secondary-dark text-text-light dark:text-text-dark 
-                         dark:placeholder-gray-400 
-                        p-2.5 rounded-${style?.roundedSize} text-${style?.textSize}`}
+                    className={`flex-grow bg-background-light dark:bg-background-dark border border-field-border dark:border-field-border_dark text-field-text dark:text-field-text_dark 
+                    focus:ring-field-ring placeholder-field-placeholder dark:placeholder-field-placeholder_dark dark:focus:ring-field-ring_dark 
+                    p-2.5 rounded-${style?.roundedSize} text-${style?.textSize}`}
                     value={magic.inputValue}
                     onChange={handleSelectChange}
                     required={required}
@@ -486,7 +484,7 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
                 </select>
             </div>
             {helperText && (
-                <p className="mt-1 ml-2 text-sm text-text-light dark:text-text-dark">{helperText}</p>
+                <p className="mt-1 ml-2 text-sm text-field-text dark:text-field-text_dark">{helperText}</p>
             )}
         </div>
     );
@@ -543,7 +541,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
         <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
             <label
                 htmlFor={htmlFor}
-                className="block mb-2 text-sm font-semibold text-secondary-light dark:text-secondary-dark ml-2"
+                className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
             >
                 {title}
             </label>
@@ -563,7 +561,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     id={id}
                     value={magic.inputValue}
                     onChange={handleChange}
-                    className={`bg-background-light dark:bg-background-dark h-11 text-center text-text-light dark:text-text-dark text-sm block w-full py-2.5`}
+                    className={`bg-background-light dark:bg-background-dark h-11 text-center text-field-text dark:text-field-text_dark text-sm block w-full py-2.5`}
                     required={required}
                     disabled
                 />
