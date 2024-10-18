@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Props, { CheckingProps, CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
+import JoditEditor from "jodit-react";
 
 const Field: React.FC<Props<FieldProps>> = ({
     htmlFor = 'default',
@@ -235,7 +236,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
     };
 
     return (
-        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width} z-0`}>
             {title && (
                 <label
                     htmlFor={htmlFor}
@@ -244,7 +245,7 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
                     {title}
                 </label>
             )}
-            <div className="flex items-center w-full">
+            <div className="flex items-center w-full ">
                 <div className="relative w-full">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg className="w-4 h-4 text-field-border dark:text-field-border_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -317,7 +318,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
     };
 
     return (
-        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+        <div className={`flex items-start flex-col mx-${style.spaceX} my-${style.spaceY} w-${style.width} z-0`}>
             {title && (
                 <label
                     htmlFor={htmlFor}
@@ -538,7 +539,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
     };
 
     return (
-        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width} z-0`}>
             <label
                 htmlFor={htmlFor}
                 className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
@@ -635,6 +636,26 @@ const Checkbox: React.FC<Props<CheckingProps>> = ({
     );
 };
 
+const WYSIWYGEditor = () => {
+    const editor = useRef(null);
+    const [content, setContent] = useState("");
+
+    return (
+        <div>
+
+
+            <JoditEditor
+                ref={editor}
+                value={content}
+                onChange={(newContent) => setContent(newContent)}
+                className="h-0.5"
+            />
+
+
+        </div>
+    );
+}
+
 const Input = {
     Field,
     FileUploader,
@@ -642,7 +663,8 @@ const Input = {
     SearchDropdown,
     FieldDropDown,
     Counter,
-    Checkbox
+    Checkbox,
+    WYSIWYGEditor
 };
 
 export default Input;

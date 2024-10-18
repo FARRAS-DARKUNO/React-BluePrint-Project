@@ -11,7 +11,7 @@ const SideBar: React.FC<SideBarProps> = ({ ParentActiveChange, parentActive }) =
 
     return (
         <div
-            className="h-[calc(100vh-64px)] w-[64px] flex flex-row max-lg:hidden"
+            className="h-[calc(100vh-64px)] w-[64px] flex flex-row max-lg:hidden z-50"
             style={{ position: "fixed" }}
         >
             <nav

@@ -32,7 +32,7 @@ const SettingsBar: React.FC<Props> = ({
     return (
         <>
             {(parentActive == 'Settings-Mini-ON') && (
-                <div className={`fixed flex-shrink-0 w-64 overflow-y-auto bg-background-light dark:bg-background-dark border-indigo-100 border-r-2 shadow-lg  lg:static py-5 px-1 mt-[64px] h-[calc(100vh-64px)] right-0 rounded-tl-3xl rounded-bl-3xl`}>
+                <div className={`fixed flex-shrink-0 w-64 overflow-y-auto bg-background-light dark:bg-background-dark border-indigo-100 border-r-2 shadow-lg  lg:static py-5 px-1 mt-[64px] h-[calc(100vh-64px)] right-0 rounded-tl-3xl rounded-bl-3xl z-50`}>
                     <ul className="font-medium px-2">
                         <li className="flex items-center gap-2  bg-transparent hover:bg-transparent " id="avatarButton " >
                             <img className="w-10 h-10 rounded-full" src="./public/pp.jpg" alt="" />

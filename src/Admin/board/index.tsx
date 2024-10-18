@@ -66,35 +66,9 @@ const Board = () => {
                     ParentActiveChange={ParentActiveChange}
                     parentActive={parentActive}
                 />
-                <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[1000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
+                <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[10000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
                     <form onSubmit={handleSubmit}>
-                        <MTC.Input.Field
-                            magic={{
-                                regex: emailRegex,
-                                errorMessage: "hallos",
-                                inputValue: formData.email,
-                                setInputValue: (value) => handleChange('email', value)
-                            }}
-                        />
-                        <MTC.Input.Field
-                            helperText="Please enter your password"
-                            magic={{
-                                type: "password",
-                                inputValue: formData.password,
-                                setInputValue: (value) => handleChange('password', value)
-                            }}
-                        />
-                        <MTC.Input.FileUploader
-                            style={{ spaceY: 2, roundedSize: 'xl' }}
-                            magic={{
-                                selectedFile: formData.selectedFile,
-                                setSelectedFile: (value) => handleChange('selectedFile', value),
-                                isConvertBase64: true,
-                                accept: '.png, .pdf'
-
-                            }}
-
-                        />
+                       
                         <MTC.Input.SearchBar magic={{ onSearch: handleSearch, searchTerm: formData.search, setSearchTerm: (value) => handleChange('search', value) }} />
                         <MTC.Input.SearchDropdown magic={{
                             categories: category,
@@ -107,20 +81,14 @@ const Board = () => {
                             selectedCategory: formData.categoryValue,
                             setSearchTerm: (value) => handleChange('searchDropdown', value),
                         }} />
-                        <MTC.Input.FieldDropDown magic={{
-                            options: [
-                                { label: "hallo", value: "Mantap" },
-                                { label: "hallo2", value: "Mantap2" },
-                                { label: "hallo3", value: "Mantap4" }
-                            ]
-                        }} />
+                        
                         <MTC.Input.Counter magic={{
                             inputValue: formData.counter,
                             setInputValue: (value) => handleChange('counter', value),
                             maximum: 10,
                             minimum:1
                         }} />
-                        <MTC.Input.Checkbox/>
+                        <MTC.Input.WYSIWYGEditor/>
                     
                         <MTC.Button.GradationBorder buttonType="submit" />
                     </form>

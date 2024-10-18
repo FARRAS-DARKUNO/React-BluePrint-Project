@@ -10,7 +10,7 @@ const NotificationBar: React.FC<Props> = ({ parentActive }) => {
     return (
         <>
             {(parentActive == 'Notification-ON' || parentActive == 'Notification-Mini-ON') && (
-                <div className={`fixed flex-shrink-0 w-64 overflow-y-auto bg-background-light dark:bg-background-dark border-indigo-100 border-r-2 shadow-lg  lg:static py-5 px-1 ${parentActive === 'Notification-Mini-ON' ? 'mt-[64px] h-[calc(100vh-64px)] right-0 rounded-tl-3xl rounded-bl-3xl' : 'rounded-tr-3xl rounded-br-3xl'}`}>
+                <div className={`fixed flex-shrink-0 w-64 overflow-y-auto bg-background-light dark:bg-background-dark border-indigo-100 border-r-2 shadow-lg  lg:static py-5 px-1 ${parentActive === 'Notification-Mini-ON' ? 'mt-[64px] h-[calc(100vh-64px)] right-0 rounded-tl-3xl rounded-bl-3xl' : 'rounded-tr-3xl rounded-br-3xl'} z-50`}>
                     <ul className="font-medium">
                         {listNotification.map((Notification) => (
                             <li key={Notification.id} className="cursor-pointer hover:text-primary-light">

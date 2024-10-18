@@ -24,7 +24,7 @@ const MenusBar: React.FC<Props> = ({ parentActive }) => {
                 <div
                     className={`fixed flex-shrink-0 w-64 bg-background-light dark:bg-background-dark border-indigo-100 
                     transform transition-transform duration-300 ease-in-out border-r-2 shadow-lg rounded-tr-3xl rounded-br-3xl lg:static py-5 px-1
-                    ${parentActive === 'Menus-Mini-ON' ? 'mt-[64px] h-[calc(100vh-64px)]' : 'rounded-tr-3xl rounded-br-3xl'}`}
+                    ${parentActive === 'Menus-Mini-ON' ? 'mt-[64px] h-[calc(100vh-64px)]' : 'rounded-tr-3xl rounded-br-3xl'} z-50`}
                 >
                     <ul className="font-medium">
                         {MenuData.map((menu) => (
