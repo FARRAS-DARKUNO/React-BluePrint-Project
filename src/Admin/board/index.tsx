@@ -1,8 +1,8 @@
-import { useState } from "react";
-import MTC from "../../MTC";
+
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
 import SideBar from "./SideBar/SideBar";
 import useBoard from "./useBoard";
+
 
 const Board = () => {
 
@@ -16,37 +16,6 @@ const Board = () => {
         parentActive,
         modalRef
     } = useBoard()
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        selectedFile: null,
-        search: '',
-        categoryValue: 'all',
-        searchDropdown: '',
-        counter: 0,
-    });
-
-    const category = ['Hallo kamuu', "hallo Aku", "Hallo KitA Semua"]
-
-    const handleSearch = () => {
-        console.log(formData.search)
-    }
-
-    const handleChange = (field: string, value: any) => {
-        setFormData({
-            ...formData,
-            [field]: value
-        });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Submitted data:', formData);
-    };
-
 
 
     return (
@@ -66,32 +35,8 @@ const Board = () => {
                     ParentActiveChange={ParentActiveChange}
                     parentActive={parentActive}
                 />
-                <div className={`flex flex-1 p-4 flex-col bg-background dark:bg-background-dark h-[10000px] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    <form onSubmit={handleSubmit}>
-                       
-                        <MTC.Input.SearchBar magic={{ onSearch: handleSearch, searchTerm: formData.search, setSearchTerm: (value) => handleChange('search', value) }} />
-                        <MTC.Input.SearchDropdown magic={{
-                            categories: category,
-                            searchTerm: formData.searchDropdown,
-                            setSelectedCategory: (value) => handleChange('categoryValue', value),
-                            onSearch: () => {
-                                console.log(formData.categoryValue)
-                                console.log(formData.searchDropdown)
-                            },
-                            selectedCategory: formData.categoryValue,
-                            setSearchTerm: (value) => handleChange('searchDropdown', value),
-                        }} />
-                        
-                        <MTC.Input.Counter magic={{
-                            inputValue: formData.counter,
-                            setInputValue: (value) => handleChange('counter', value),
-                            maximum: 10,
-                            minimum:1
-                        }} />
-                        <MTC.Input.WYSIWYGEditor/>
+                <div className={`flex flex-1 p-4 flex-col overflow-y-auto bg-background dark:bg-background-dark h-[calc(100vh-64px)] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
                     
-                        <MTC.Button.GradationBorder buttonType="submit" />
-                    </form>
                 </div>
             </div>
         </div>

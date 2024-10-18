@@ -9,7 +9,7 @@ export default interface Props<T> {
     placeholder?: string;
     helperText?: string;
     required?: boolean;
-    disable?:boolean;
+    disable?: boolean;
     style?: styleProps;
     magic?: T
 }
@@ -78,4 +78,12 @@ export interface CounterProps {
 export interface CheckingProps {
     setIsChecked?: (value: boolean) => void;
     isChecked?: boolean;
+}
+
+export interface WYSIWYGEditorProps {
+    content: string,
+    setContent: (value: string) => void;
+    width?: Sizing;
+    spaceX?: number;
+    spaceY?: number;
 }

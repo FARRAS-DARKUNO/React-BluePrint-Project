@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { CheckingProps, CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps } from "./Interface";
+import Props, { CheckingProps, CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps, WYSIWYGEditorProps } from "./Interface";
 import JoditEditor from "jodit-react";
 
 const Field: React.FC<Props<FieldProps>> = ({
@@ -636,22 +636,21 @@ const Checkbox: React.FC<Props<CheckingProps>> = ({
     );
 };
 
-const WYSIWYGEditor = () => {
+const WYSIWYGEditor: React.FC<WYSIWYGEditorProps> = ({
+    content,
+    setContent,
+    width = 'full',
+    spaceX = 0,
+    spaceY = 2,
+}) => {
     const editor = useRef(null);
-    const [content, setContent] = useState("");
-
     return (
-        <div>
-
-
+        <div className={`flex flex-col mx-${spaceX} my-${spaceY} w-${width}`}>
             <JoditEditor
                 ref={editor}
                 value={content}
                 onChange={(newContent) => setContent(newContent)}
-                className="h-0.5"
             />
-
-
         </div>
     );
 }
