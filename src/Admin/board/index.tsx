@@ -1,8 +1,9 @@
 
+import { useState } from "react";
+import MTC from "../../MTC";
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
 import SideBar from "./SideBar/SideBar";
 import useBoard from "./useBoard";
-
 
 const Board = () => {
 
@@ -16,6 +17,13 @@ const Board = () => {
         parentActive,
         modalRef
     } = useBoard()
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const tougle = () => {
+        console.log(isModalOpen)
+        setIsModalOpen(true)
+    }
 
 
     return (
@@ -36,7 +44,11 @@ const Board = () => {
                     parentActive={parentActive}
                 />
                 <div className={`flex flex-1 p-4 flex-col overflow-y-auto bg-background dark:bg-background-dark h-[calc(100vh-64px)] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    
+                    <MTC.Button.Normal onClick={tougle} />
+                    <MTC.Modal.Parent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} >
+                        <MTC.Modal.Message meesage="Hallo"/>
+                        <MTC.Input.Field/>
+                    </MTC.Modal.Parent>
                 </div>
             </div>
         </div>

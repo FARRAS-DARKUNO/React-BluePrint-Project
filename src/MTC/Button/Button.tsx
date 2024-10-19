@@ -41,7 +41,7 @@ const Normal: React.FC<Props> = ({
     return (
         <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
             <button
-                onClick={() => (isDisable ? null : onClick)}
+                onClick={() => isDisable ? null : onClick!()}
                 type={buttonType}
                 className={`text-button-on_button dark:text-button-on_button_dark ${!isDisable ? 'bg-button-primary dark:bg-button-primary_dark hover:bg-secondary' : 'bg-button-disable hover:bg-button-disable'} 
                 font-semibold rounded-${style?.roundedSize} text-${style?.textSize} px-5 py-2 w-${style?.width}`}
@@ -87,7 +87,7 @@ const Gradation: React.FC<Props> = ({
     return (
         <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
             <button
-                onClick={() => isDisable ? null : onClick}
+               onClick={() => isDisable ? null : onClick!()}
                 type={buttonType}
                 disabled={isDisable}
                 className={`text-button-on_button dark:text-button-on_button_dark bg-gradient-to-r from-button-primary to-button-secondary dark:from-button-primary_dark dark:to-button-secondary_dark hover:bg-gradient-to-bl  
@@ -118,7 +118,7 @@ const Neon: React.FC<Props> = ({
     return (
         <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
             <button
-                onClick={() => isDisable ? null : onClick}
+                onClick={() => isDisable ? null : onClick!()}
                 type={buttonType}
                 disabled={isDisable}
                 className={`text-button-on_button dark:text-button-on_button_dark bg-gradient-to-r from-button-primary to-button-secondary dark:from-button-primary_dark dark:to-button-secondary_dark hover:bg-gradient-to-br  shadow-lg shadow-button-primary dark:shadow-button-primary_dark
@@ -149,7 +149,7 @@ const GradationBorder: React.FC<Props> = ({
     return (
         <div className={`mx-${style?.spaceX} my-${style?.spaceY}`}>
             <button
-                onClick={() => isDisable ? null : onClick}
+                onClick={() => isDisable ? null : onClick!()}
                 disabled={isDisable}
                 type={buttonType}
                 className={`inline-flex items-center justify-center p-0.5 overflow-hidden ${'text-' + style?.textSize} font-semibold ${'rounded-' + style?.roundedSize} ${'w-' + style?.width} 
