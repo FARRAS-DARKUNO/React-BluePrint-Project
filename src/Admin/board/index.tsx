@@ -44,11 +44,7 @@ const Board = () => {
                     parentActive={parentActive}
                 />
                 <div className={`flex flex-1 p-4 flex-col overflow-y-auto bg-background dark:bg-background-dark h-[calc(100vh-64px)] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
-                    <MTC.Button.Normal onClick={tougle} />
-                    <MTC.Modal.Parent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} >
-                        <MTC.Modal.Message meesage="Hallo"/>
-                        <MTC.Input.Field/>
-                    </MTC.Modal.Parent>
+                    <MTC.Table.MasterTable/>
                 </div>
             </div>
         </div>
