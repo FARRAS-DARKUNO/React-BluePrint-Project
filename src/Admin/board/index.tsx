@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import MTC from "../../MTC";
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
@@ -45,8 +44,10 @@ const Board = () => {
                     ParentActiveChange={ParentActiveChange}
                     parentActive={parentActive}
                 />
+
                 <div className={`flex flex-1 p-4 flex-col overflow-y-auto bg-background dark:bg-background-dark h-[calc(100vh-64px)] ${parentActive === 'CloseAll' ? "lg:ml-[64px]" : "lg:ml-[320px]"}`}>
                     <MTC.Table.MasterTable/>
+
                 </div>
             </div>
         </div>
