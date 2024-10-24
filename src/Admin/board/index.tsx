@@ -4,7 +4,8 @@ import MTC from "../../MTC";
 import HeaderBoard from "./HeaderBoard/HeaderBoard";
 import SideBar from "./SideBar/SideBar";
 import useBoard from "./useBoard";
-
+import Button from '../../components/Button/Button';
+import { useTranslation } from "react-i18next";
 const Board = () => {
 
     const {
@@ -26,6 +27,7 @@ const Board = () => {
     }
 
 
+    const { t } = useTranslation();
     return (
         <div className="flex w-100% flex-col bg-background-light dark:bg-background-dark">
             <HeaderBoard

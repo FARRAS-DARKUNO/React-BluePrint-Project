@@ -2,7 +2,7 @@ export type TypeApplication = "application/x-www-form-urlencoded" | "multipart/f
 
 export type HttpMethod = "post" | "put" | "delete";
 
-export type LanguageType = 'Eng' | 'Ind'
+export type LanguageType = 'Eng' | 'Idn'
 
 export type ThemesType = 'dark' | 'light'
 
