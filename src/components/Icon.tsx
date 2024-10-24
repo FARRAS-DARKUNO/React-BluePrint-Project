@@ -1,5 +1,5 @@
 import React from 'react';
-import * as FaIcons from 'react-icons/fa6'; 
+import * as FaIcons from 'react-icons/fa6';
 
 export type IconName = keyof typeof FaIcons;
 
@@ -7,7 +7,7 @@ interface IconProps {
   name: IconName;
   size?: number | string;
   color?: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 const Icon: React.FC<IconProps> = ({ name, size = 24, color = 'black', ...props }) => {

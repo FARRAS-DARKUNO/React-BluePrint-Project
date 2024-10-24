@@ -12,12 +12,12 @@ export default {
           light: '#29C7CA',
           DEFAULT: '#29C7CA',
           dark: '#2BADAF',
-          shadow:'#355657'
+          shadow: '#355657'
         },
         secondary: {
           light: '#111828',
           DEFAULT: '#111828',
-          dark: '#111828',
+          dark: '#51a6f5',
         },
         tertiary: {
           light: '#28A2CC',
@@ -49,6 +49,27 @@ export default {
           DEFAULT: '#CD3B52',
           dark: '#A02235',
         },
+        button: {
+          primary: '#29C7CA',
+          secondary: '#3b82f6',
+          primary_dark: '#29C7CA',
+          secondary_dark: '#3b82f6',
+          DEFAULT: '#28A2CC',
+          on_button: '#FFFFFF',
+          on_button_dark: '#FFFFFF',
+          disable: '#EBEBE4'
+        },
+        field: {
+          DEFAULT: '#111828',
+          text: '#111828',
+          text_dark: '#FFFFFF',
+          border: '#111828',
+          border_dark: '#51a6f5',
+          ring: '#2BADAF',
+          ring_dark: '#2BADAF',
+          placeholder :'#808080',
+          placeholder_dark :'#808080',
+        }
       },
     },
   },
