@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Props, { CheckingProps, CounterProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps, WYSIWYGEditorProps } from "./Interface";
+import Props, { CheckingProps, CounterProps, DescriptionProps, FieldDropDownProps, FieldProps, FileProps, SearchDropDownProps, SearchProps, WYSIWYGEditorProps } from "./Interface";
 import JoditEditor from "jodit-react";
 
 const Field: React.FC<Props<FieldProps>> = ({
@@ -11,6 +11,8 @@ const Field: React.FC<Props<FieldProps>> = ({
     helperText = '',
     name = '',
     required = false,
+    maxLength,
+    disable = false,
     magic = {
         type: 'text',
         errorMessage: 'Input is invalid',
@@ -56,6 +58,7 @@ const Field: React.FC<Props<FieldProps>> = ({
                 <input
                     type={showPassword ? 'text' : magic.type}
                     id={id}
+                    maxLength={maxLength}
                     name={name}
                     className={`flex-grow bg-background-light dark:bg-background-dark border ${isValid ? 'border-field-border' : 'border-red-500'} dark:border-field-border_dark text-field-text dark:text-field-text_dark 
                         focus:ring-field-ring placeholder-field-placeholder dark:placeholder-field-placeholder_dark dark:focus:ring-field-ring_dark 
@@ -64,6 +67,7 @@ const Field: React.FC<Props<FieldProps>> = ({
                     required={required}
                     value={magic.inputValue}
                     onChange={handleInputChange}
+                    disabled={disable}
                 />
                 {magic.type === 'password' && (
                     <button
@@ -95,6 +99,7 @@ const FileUploader: React.FC<Props<FileProps>> = ({
     title = 'Title Field',
     helperText = 'Click to upload or drag and drop',
     required = false,
+    disable = false,
     magic = {
         accept: '',
         selectedFile: null,
@@ -201,6 +206,7 @@ const FileUploader: React.FC<Props<FileProps>> = ({
                     onChange={handleFileChange}
                     accept={magic.accept}
                     required={required}
+                    disabled={disable}
                 />
             </div>
         </div>
@@ -214,6 +220,8 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
     title = '',
     helperText = '',
     required = false,
+    maxLength,
+    disable = false,
     magic = {
         searchTerm: '',
         setSearchTerm: undefined,
@@ -261,11 +269,14 @@ const SearchBar: React.FC<Props<SearchProps>> = ({
                         value={magic.searchTerm}
                         onChange={handleInputChange}
                         required={required}
+                        maxLength={maxLength}
+                        disabled={disable}
                     />
                 </div>
                 <button
                     type="button"
                     onClick={magic.onSearch}
+                    disabled={disable}
                     className={`p-2.5 ms-2 text-sm font-medium text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark rounded-${style.roundedSize || 'full'} `}
                 >
                     <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -288,6 +299,8 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
     htmlFor = 'search-dropdown',
     helperText = '',
     required = false,
+    maxLength,
+    disable = false,
     magic = {
         setSearchTerm: undefined,
         setSelectedCategory: undefined,
@@ -335,6 +348,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
                         id={id}
                         type="button"
                         onClick={handleDropdownToggle}
+                        disabled={disable}
                         className={`flex-shrink-0 z-10 inline-flex items-center py-3.5 px-2 text-sm font-medium border truncate max-w-xs rounded-s-${style.roundedSize} rounded-tr-none rounded-br-none
                          text-text-light dark:text-text-dark bg-gray-100  hover:bg-gray-200  dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 `}
                     >
@@ -387,6 +401,7 @@ const SearchDropdown: React.FC<Props<SearchDropDownProps>> = ({
                         className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-none border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                         placeholder={placeholder}
                         required={required}
+                        maxLength={maxLength}
                     />
                     <button
                         type="button"
@@ -432,6 +447,7 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
     helperText = '',
     name = '',
     required = false,
+    disable = false,
     magic = {
         type: 'select',
         errorMessage: 'Selection is invalid',
@@ -473,6 +489,7 @@ const FieldDropDown: React.FC<Props<FieldDropDownProps>> = ({
                     value={magic.inputValue}
                     onChange={handleSelectChange}
                     required={required}
+                    disabled={disable}
                 >
                     <option value="" disabled>
                         {placeholder}
@@ -497,6 +514,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
     title = 'Title Field',
     helperText = '',
     required = false,
+    disable = false,
     magic = {
         inputValue: 0,
         maximum: 10,
@@ -551,6 +569,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     type="button"
                     id="decrement-button"
                     onClick={decrementQuantity}
+                    disabled={disable}
                     className={`text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark border border-gray-300 rounded-l-${style.roundedSize} p-3 h-11`}
                 >
                     <svg className="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
@@ -570,6 +589,7 @@ const Counter: React.FC<Props<CounterProps>> = ({
                     type="button"
                     id="increment-button"
                     onClick={incrementQuantity}
+                    disabled={disable}
                     className={`text-button-on_button dark:to-button-on_button_dark bg-button-primary dark:bg-button-primary_dark border border-gray-300 rounded-r-${style.roundedSize} p-3 h-11`}
                 >
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -655,6 +675,76 @@ const WYSIWYGEditor: React.FC<WYSIWYGEditorProps> = ({
     );
 }
 
+const Description: React.FC<Props<DescriptionProps>> = ({
+    htmlFor = 'default',
+    id = 'default',
+    placeholder = 'Input Field',
+    title = 'Title Field',
+    helperText = '',
+    name = '',
+    required = false,
+    maxLength,
+    disable = false,
+    magic = {
+        errorMessage: 'Input is invalid',
+        inputValue: '',
+        setInputValue: undefined,
+        regex: undefined,
+    },
+    style = {
+        width: 'full',
+        spaceX: 0,
+        spaceY: 0,
+        textSize: 'sm',
+        roundedSize: 'lg',
+    },
+}) => {
+    const [isValid, setIsValid] = useState(true);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        if (magic.setInputValue) {
+            magic.setInputValue(value);
+        }
+
+        if (magic.regex) {
+            setIsValid(magic.regex.test(value));
+        }
+    };
+
+    return (
+        <div className={`mx-${style.spaceX} my-${style.spaceY} w-${style.width}`}>
+            <label
+                htmlFor={htmlFor}
+                className="block mb-2 text-sm font-semibold text-field-text dark:text-field-text_dark ml-2"
+            >
+                {title}
+            </label>
+            <div className="flex items-center w-full">
+                <textarea
+                    id={id}
+                    name={name}
+                    className={`flex-grow bg-background-light dark:bg-background-dark border ${isValid ? 'border-field-border' : 'border-red-500'} dark:border-field-border_dark text-field-text dark:text-field-text_dark 
+                        focus:ring-field-ring placeholder-field-placeholder dark:placeholder-field-placeholder_dark dark:focus:ring-field-ring_dark 
+                        p-2.5 rounded-${style?.roundedSize} text-${style?.textSize} h-40`}
+                    placeholder={placeholder}
+                    required={required}
+                    value={magic.inputValue}
+                    maxLength={maxLength}
+                    onChange={handleInputChange}
+                    disabled={disable}
+                />
+            </div>
+            {helperText && (
+                <p className="mt-1 ml-2 text-sm text-field-text dark:text-field-text_dark">{helperText}</p>
+            )}
+            {!isValid && (
+                <p className="mt-1 ml-2 text-sm text-error">{magic.errorMessage}</p>
+            )}
+        </div>
+    );
+};
+
 const Input = {
     Field,
     FileUploader,
@@ -663,7 +753,8 @@ const Input = {
     FieldDropDown,
     Counter,
     Checkbox,
-    WYSIWYGEditor
+    WYSIWYGEditor,
+    Description
 };
 
 export default Input;

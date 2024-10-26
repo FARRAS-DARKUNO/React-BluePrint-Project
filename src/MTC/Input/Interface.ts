@@ -11,6 +11,7 @@ export default interface Props<T> {
     required?: boolean;
     disable?: boolean;
     style?: styleProps;
+    maxLength?: number;
     magic?: T
 }
 
@@ -25,6 +26,13 @@ interface styleProps {
 
 export interface FieldProps {
     type?: "number" | "email" | "password" | "text" | "date" | "datetime-local";
+    regex?: RegExp;
+    setInputValue?: (value: string) => void;
+    inputValue?: string;
+    errorMessage?: string;
+}
+
+export interface DescriptionProps {
     regex?: RegExp;
     setInputValue?: (value: string) => void;
     inputValue?: string;
